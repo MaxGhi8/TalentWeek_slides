@@ -1,4 +1,0 @@
-\beamer@sectionintoc {1}{Deep Learning}{2}{0}{1}
-\beamer@sectionintoc {2}{Applicazioni interessanti}{30}{0}{2}
-\beamer@sectionintoc {3}{Risultati teorici}{37}{0}{3}
-\beamer@sectionintoc {4}{Operatori neurali}{47}{0}{4}
