@@ -22,7 +22,7 @@
 \visibilitySiegel{0}
 
 % title and subtitle
-\title{Operator learning  \newline  for multi-patch domains}
+\title{Introduzione al Deep Learning}
 \subtitle{}
 
 % For multiple authors/presenters :
@@ -32,13 +32,13 @@
 %      b- For different institutes, comment the line \AuthorInstitute{...} and use
 %         \inst{...} together with \institute{...}
 \singleAuthor{Massimiliano Ghiotto}
-\AuthorInstitute{Departement of Mathematics, University of Pavia}
+\AuthorInstitute{Dottorando presso Dipartimento di Matematica, \newline Universit\`a di Pavia}
 %\multAuthors{Antoine Gansel\inst{1} \and Jullie Cailler\inst{2}}
 
 %% collaborators with institute
 % \Collaborators{{Julie Cailler\inst{2}}} 
-\Supervisors{Carlo Marcati\inst{1} \and {Giancarlo Sangalli\inst{1}}}
-\institute{{\inst{1}Departement of Mathematics, \newline University of Pavia}}
+\Supervisors{Raffaella Guglielmann\inst{1}}
+\institute{{\inst{1}Dipartimento di Matematica, \newline Universit\`a di Pavia}}
 %% collaborators without institute
 % \Supervisors{Carlo Marcati, \and Giancarlo Sangalli} % \institute{{\inst{1}University of Pavia}}
 
@@ -59,7 +59,43 @@
 \setbeamertemplate{footline}[footline-body]
 \setbeamertemplate{background}[background-body]
 
-\section{Deep Learning}
+\section{Introduzione}
+
+\begin{frame}{Storia}
+    Il Deep Learning \'e una la scienza che porta i computers a risolvere problemi senza programmarli esplicitamente. Il processo di apprendimento \'e ricavato dai data con cui si allena il modello.
+    \pause
+    \begin{itemize}
+        \item  I primi modelli sviluppati sono chiamati percettroni e sono stati sviluppati nel 1957,
+        \item  il primo modello di Deep Learning \'e stato sviluppato nel 1989 (multi-percettrone), 
+        \item Deep Blue ha sconfitto Kasparov nel 1997, AlphaGo ha sconfitto Lee Sedol nel 2016.
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}{Documentario interessante}
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.9\textheight]{logos/alphaGo.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Quando usare il Deep Learning?}
+    Quando usarlo:
+    \begin{itemize}
+        \item  Grandi quantit\'a di dati,
+        \item  problema molto complesso,
+        \item  per velocizzare alcuni algoritmi.
+    \end{itemize}
+    \pause
+    Quando non usarlo:
+    \begin{itemize}
+        \item  Piccole quantit\'a di dati,
+        \item  problemi semplici,
+        \item  quando si cercano spiegazioni,
+        \item  quando si possono commettere errori. 
+    \end{itemize}
+\end{frame}
+
+\section{Percettrone}
 
 \begin{frame}{Regressione lineare}
     \begin{figure}
@@ -293,7 +329,7 @@
         \end{minipage}%
         \hfill
         \begin{minipage}{0.3\textwidth}
-        Problema di classificazione.
+        Consideriamo il problema di classificazione. 
         \[y = \sigma\left(\mathbf{w}\cdot \mathbf{x} + b\right),\] 
         con $\sigma(z) = 1$ se $z\ge 0$ e nulla altrove.
         \end{minipage}
@@ -442,6 +478,7 @@ Notiamo che se $x_{0}, x_{1} \in \lbrace 0, 1 \rbrace$ allora con il percettrone
 Ma non si puo' rappresentare la disgiunzione esclusiva (XOR).
 \end{frame}
 
+\section{Deep Learning}
 \begin{frame}{Multi-layer Perceptron}
     Indicando lo XOR con $\times$ vale che
     \[
@@ -1166,6 +1203,19 @@ Ma non si puo' rappresentare la disgiunzione esclusiva (XOR).
 \end{columns}
 \end{frame}
 
+\begin{frame}{Approsimazione universale per funzioni}
+    \begin{definition}
+        Una funzione continua $f: \R \to \R$ si dice sigmoidale se 
+        \[ \lim_{x \to -\infty} f(x) = 0  \quad \text{e} \quad  \lim_{x \to +\infty} f(x) = 1. \]
+    \end{definition}
+    \pause
+    \begin{theorem}
+        Sia $K \subset \R^{d}$ chiusoo e limitato e con $d \in \N$ e $\sigma: \R \to \R$ funzione sigmoidale allora $MLP(\sigma, d, 2)$ \'e denso in $C(K)$.
+    
+    \end{theorem}
+    Questo significa che per ogni $f \in C(K)$ e $\varepsilon > 0$ esiste una rete neurale $f_{\theta} \in MLP(\sigma, d, 2)$ tale che $\|f - f_{\theta}\|_{\infty} < \varepsilon$.
+\end{frame}
+
 \begin{frame}{Convolutional Neural Network (CNN)}
 \begin{figure}
     \begin{minipage}{0.7\textwidth}
@@ -1198,7 +1248,8 @@ Ma non si puo' rappresentare la disgiunzione esclusiva (XOR).
             \centering
             \includegraphics[height=0.6\textheight]{architectures/attention.png}
         \end{minipage}%
-        \begin{minipage}[T]{0.3\textwidth}
+        \hfill
+        \begin{minipage}[T]{0.35\textwidth}
             \centering
             \includegraphics[height=0.8\textheight]{architectures/transformer.png}
         \end{minipage}
@@ -1208,7 +1259,6 @@ Ma non si puo' rappresentare la disgiunzione esclusiva (XOR).
 \end{frame}
 
 \section{Applicazioni interessanti}
-\sectionpage
 
 
 \begin{frame}{Applicazioni alle immagini}
@@ -1286,422 +1336,393 @@ Ma non si puo' rappresentare la disgiunzione esclusiva (XOR).
 \end{itemize}
     \pause
     \vspace{0.3cm}
-    Per allenare Chat-GPT3, formata da $175$ bilioni di parametri, hanno impiegato $1023$ Nvidia A$100$ per $34$ giorni spendendo $5$ milioni di dollari in corrente.
+    Per allenare Chat-GPT3, formata da $175$ miliardi di parametri, hanno impiegato $1023$ Nvidia A$100$ per $34$ giorni spendendo $5$ milioni di dollari in corrente.
     
     \vspace{0.3cm}
     \pause
     Anche per scaricare il modello più piccolo di LLaMA $3$ $8B$ sono necessari $20$ GB di VRAM e per il modello $LLaMA$ $3$ $70B$ sono necessari $140GB$ di spazio e $160GB$ di VRAM in $FP16$.
 \end{frame}
 
-\section{Risultati teorici}
-\sectionpage
+% \section{Risultati teorici}
 
-\begin{frame}{Approsimazione universale per funzioni}
-    \begin{definition}
-        Sia $K \subset \R^{d}$ compatto e con $d \in \N$. Una funzione continua $f: \R \to \R$ si dice discriminante se
-        \[
-        \int_{K} f(\textbf{a}\cdot \textbf{x} +b) \ d\mu(x) = 0 \quad \forall \textbf{a} \in \R^{d},\ \forall b \in \R \quad \Rightarrow \quad \mu \equiv 0.
-        \]
-    \end{definition}
-    \pause
-    \begin{definition}
-        Una funzione continua $f: \R \to \R$ si dice sigmoidale se $ \lim_{x \to -\infty} f(x) = 0$ e $\lim_{x \to +\infty} f(x) = 1$.
-    \end{definition}
-    \pause
-    Tutte le funzioni sigmoidali sono discriminanti.
-\end{frame}
 
-\begin{frame}{Approsimazione universale per funzioni}
-\begin{theorem}
-    Sia $K \subset \R^{d}$ compatto e con $d \in \N$ e $\sigma: \R \to \R$ funzione discriminante allora $MLP(\sigma, d, 2)$ \'e denso in $C(K)$.
-\end{theorem}
-Ovvero per ogni $f \in C(K)$ e $\varepsilon > 0$ esiste una rete neurale $f_{\theta} \in MLP(\sigma, d, 2)$ tale che $\|f - f_{\theta}\|_{\infty} < \varepsilon$.
-\end{frame}
+% \begin{frame}{Approssimazione universale per operatori}
+%     Abbiamo $ n, p, m \in \N $, $ c_i^k, \theta_i^k, \xi_{ij}^k, \zeta^k \in \R $, $ w^k \in \R^d $, $ x_j \in K_1 $, $y\in K_2 \subset \R^{d}$ e $u \in V$ tali che
+%     \begin{equation}
+%         \underbrace{{\color{green}\sum_{k=1}^{p}}}_{{}\text{scalar product}} \underbrace{{\color{red} \sum_{i=1}^{n}c_i^k \sigma \left( \sum_{j=1}^{m} \xi_{ij}^k u(x_j) + \theta_i^k \right)}}_{{}\text{branch net}} \underbrace{{\color{blue} \sigma(w^k \cdot y + \zeta^k)}}_{{}\text{trunk net}}.
+%     \end{equation}
+%     \pause
+%     Dove notiamo che la branch net \'e una rete neurale con $2$ layers ed $ m $ neuroni in input e $p$ neuroni di output e la trunk net \'e una rete neurale con $1$ layer con $d$ layer di input e $p$.
+% \end{frame}
 
-\begin{frame}{Approsimazione universale per operatori}
-    \begin{theorem}
-        Sia $\sigma$ non polinomiale, $X$ spazio di Banach, $ K_1 \subset X $, $ K_2 \subset \R^d $ compatti e $ V $ compatto in $ C(K_1) $. Sia $ G: V \to C(K_2) $ un operatore continuo non lineare, allora per ogni $ \varepsilon > 0 $ esistono $ n, p, m \in \N $, $ c_i^k, \theta_i^k, \xi_{ij}^k, \zeta^k \in \R $, $ w^k \in \R^d $ e $ x_j \in K_1 $ tali che
-        \[ \left| G(u)(y) - \sum_{k=1}^{p}\sum_{i=1}^{n}c_i^k \sigma \left( \sum_{j=1}^{m} \xi_{ij}^k u(x_j) + \theta_i^k \right) \sigma(w^k \cdot y + \zeta^k) \right| < \varepsilon  \]
-        vale per ogni $ u \in V $ e $ y \in K_2 $.
-    \end{theorem}
-\end{frame}
-
-\begin{frame}{Approssimazione universale per operatori}
-    Abbiamo $ n, p, m \in \N $, $ c_i^k, \theta_i^k, \xi_{ij}^k, \zeta^k \in \R $, $ w^k \in \R^d $, $ x_j \in K_1 $, $y\in K_2 \subset \R^{d}$ e $u \in V$ tali che
-    \begin{equation}
-        \underbrace{{\color{green}\sum_{k=1}^{p}}}_{{}\text{scalar product}} \underbrace{{\color{red} \sum_{i=1}^{n}c_i^k \sigma \left( \sum_{j=1}^{m} \xi_{ij}^k u(x_j) + \theta_i^k \right)}}_{{}\text{branch net}} \underbrace{{\color{blue} \sigma(w^k \cdot y + \zeta^k)}}_{{}\text{trunk net}}.
-    \end{equation}
-    \pause
-    Dove notiamo che la branch net \'e una rete neurale con $2$ layers ed $ m $ neuroni in input e $p$ neuroni di output e la trunk net \'e una rete neurale con $1$ layer con $d$ layer di input e $p$.
-\end{frame}
-
-\begin{frame}{Deep Operator Network}
-\begin{center}
-    \begin{tikzpicture}
-        \node (branch) [label={[font=\footnotesize]left:$\mathbf{u}_i = \begin{bmatrix} u_i(x_1) \\ \vdots \\ u_i(x_m) \end{bmatrix} \in \R^m$}, label={[font = \small]above:Branch Network}, font=\footnotesize]{
-            \begin{tikzpicture}[
-            >=stealth,
-            shorten >=1pt,
-            auto,
-            node distance=2cm,
-            neuron/.style={circle, fill=orange!25, minimum size=7pt, inner sep=0pt},
-            layer/.style={thick, draw=black!50, rectangle, fill=black!10, minimum height=4em},
-        ]
-            \def\altezza{0.5};
-            \def\larghezza{1};
-            % Draw the input layer nodes
-            \foreach \name / \y in {1,...,3}
-                \node[neuron] (I-\name) at (0,-\y*\altezza-\altezza/2) {};
+% \begin{frame}{Deep Operator Network}
+% \begin{center}
+%     \begin{tikzpicture}
+%         \node (branch) [label={[font=\footnotesize]left:$\mathbf{u}_i = \begin{bmatrix} u_i(x_1) \\ \vdots \\ u_i(x_m) \end{bmatrix} \in \R^m$}, label={[font = \small]above:Branch Network}, font=\footnotesize]{
+%             \begin{tikzpicture}[
+%             >=stealth,
+%             shorten >=1pt,
+%             auto,
+%             node distance=2cm,
+%             neuron/.style={circle, fill=orange!25, minimum size=7pt, inner sep=0pt},
+%             layer/.style={thick, draw=black!50, rectangle, fill=black!10, minimum height=4em},
+%         ]
+%             \def\altezza{0.5};
+%             \def\larghezza{1};
+%             % Draw the input layer nodes
+%             \foreach \name / \y in {1,...,3}
+%                 \node[neuron] (I-\name) at (0,-\y*\altezza-\altezza/2) {};
         
-            % Draw the hidden layer nodes
-            \foreach \name / \y in {1,...,4}
-                \node[neuron] (H1-\name) at (\larghezza,-\y*\altezza) {};
+%             % Draw the hidden layer nodes
+%             \foreach \name / \y in {1,...,4}
+%                 \node[neuron] (H1-\name) at (\larghezza,-\y*\altezza) {};
                 
-            \foreach \name / \y in {1,...,4}
-                \node[neuron] (H2-\name) at (\larghezza*2,-\y*\altezza) {};
+%             \foreach \name / \y in {1,...,4}
+%                 \node[neuron] (H2-\name) at (\larghezza*2,-\y*\altezza) {};
         
-            % Draw the output layer node
-            \foreach \name / \y in {2,3}
-                \node[neuron] (O-\name) at (\larghezza*3,-\y*\altezza) {};
+%             % Draw the output layer node
+%             \foreach \name / \y in {2,3}
+%                 \node[neuron] (O-\name) at (\larghezza*3,-\y*\altezza) {};
         
-            % Connect every node in the input layer with every node in the
-            % hidden layer.
-            \foreach \source in {1,...,3}
-                \foreach \dest in {1,...,4}
-                    \path (I-\source) edge (H1-\dest);
+%             % Connect every node in the input layer with every node in the
+%             % hidden layer.
+%             \foreach \source in {1,...,3}
+%                 \foreach \dest in {1,...,4}
+%                     \path (I-\source) edge (H1-\dest);
                     
-            \foreach \source in {1,...,4}
-                \foreach \dest in {1,...,4}
-                    \path (H1-\source) edge (H2-\dest);
+%             \foreach \source in {1,...,4}
+%                 \foreach \dest in {1,...,4}
+%                     \path (H1-\source) edge (H2-\dest);
         
-            % Connect every node in the hidden layer with the output layer
-            \foreach \source in {1,...,4}
-                \foreach \dest in {2,3}
-                    \path (H2-\source) edge (O-\dest);
-        \end{tikzpicture}%
-        };%
-        \node[below=0.5cm of branch, label={[font=\footnotesize]left:$\mathbf{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_d \end{bmatrix} \in \Omega    \subset \R^d$}, label={[font=\small]below:Trunk Network}, font=\footnotesize] (trunk) {
-        \begin{tikzpicture}[
-            >=stealth,
-            shorten >=1pt,
-            auto,
-            node distance=2cm,
-            neuron/.style={circle, fill=orange!25, minimum size=7pt, inner sep=0pt},
-            layer/.style={thick, draw=black!50, rectangle, fill=black!10, minimum height=4em},
-            % node_prod/.style={draw, circle, fill=white, inner sep=0pt, minimum size=6mm},
-        ]
-            \def\altezza{0.5};
-            \def\larghezza{1};
-            % Draw the input layer nodes
-            \foreach \name / \y in {1,...,4}
-                \node[neuron] (I-\name) at (0,-\y*\altezza) {};
+%             % Connect every node in the hidden layer with the output layer
+%             \foreach \source in {1,...,4}
+%                 \foreach \dest in {2,3}
+%                     \path (H2-\source) edge (O-\dest);
+%         \end{tikzpicture}%
+%         };%
+%         \node[below=0.5cm of branch, label={[font=\footnotesize]left:$\mathbf{y} = \begin{bmatrix} y_1 \\ \vdots \\ y_d \end{bmatrix} \in \Omega    \subset \R^d$}, label={[font=\small]below:Trunk Network}, font=\footnotesize] (trunk) {
+%         \begin{tikzpicture}[
+%             >=stealth,
+%             shorten >=1pt,
+%             auto,
+%             node distance=2cm,
+%             neuron/.style={circle, fill=orange!25, minimum size=7pt, inner sep=0pt},
+%             layer/.style={thick, draw=black!50, rectangle, fill=black!10, minimum height=4em},
+%             % node_prod/.style={draw, circle, fill=white, inner sep=0pt, minimum size=6mm},
+%         ]
+%             \def\altezza{0.5};
+%             \def\larghezza{1};
+%             % Draw the input layer nodes
+%             \foreach \name / \y in {1,...,4}
+%                 \node[neuron] (I-\name) at (0,-\y*\altezza) {};
         
-            % Draw the hidden layer nodes
-            \foreach \name / \y in {1,...,5}
-                \node[neuron] (H1-\name) at (\larghezza,-\y*\altezza + \altezza/2) {};
+%             % Draw the hidden layer nodes
+%             \foreach \name / \y in {1,...,5}
+%                 \node[neuron] (H1-\name) at (\larghezza,-\y*\altezza + \altezza/2) {};
                 
-            \foreach \name / \y in {1,...,6}
-                \node[neuron] (H2-\name) at (\larghezza*2,-\y*\altezza + \altezza) {};
+%             \foreach \name / \y in {1,...,6}
+%                 \node[neuron] (H2-\name) at (\larghezza*2,-\y*\altezza + \altezza) {};
         
-            \foreach \name / \y in {1,...,5}
-                \node[neuron] (H3-\name) at (\larghezza*3,-\y*\altezza + \altezza/2) {};
+%             \foreach \name / \y in {1,...,5}
+%                 \node[neuron] (H3-\name) at (\larghezza*3,-\y*\altezza + \altezza/2) {};
 
-            % Draw the output layer node
-            \foreach \name / \y in {2,3}
-                \node[neuron] (O-\name) at (\larghezza*4,-\y*\altezza) {};
+%             % Draw the output layer node
+%             \foreach \name / \y in {2,3}
+%                 \node[neuron] (O-\name) at (\larghezza*4,-\y*\altezza) {};
         
-            % Connect every node in the input layer with every node in the
-            % hidden layer.
-            \foreach \source in {1,...,4}
-                \foreach \dest in {1,...,5}
-                    \path (I-\source) edge (H1-\dest);
+%             % Connect every node in the input layer with every node in the
+%             % hidden layer.
+%             \foreach \source in {1,...,4}
+%                 \foreach \dest in {1,...,5}
+%                     \path (I-\source) edge (H1-\dest);
                     
-            \foreach \source in {1,...,5}
-                \foreach \dest in {1,...,6}
-                    \path (H1-\source) edge (H2-\dest);
+%             \foreach \source in {1,...,5}
+%                 \foreach \dest in {1,...,6}
+%                     \path (H1-\source) edge (H2-\dest);
         
-            \foreach \source in {1,...,6}
-                \foreach \dest in {1,...,5}
-                    \path (H2-\source) edge (H3-\dest);
+%             \foreach \source in {1,...,6}
+%                 \foreach \dest in {1,...,5}
+%                     \path (H2-\source) edge (H3-\dest);
 
-            % Connect every node in the hidden layer with the output layer
-            \foreach \source in {1,...,5}
-                \foreach \dest in {2,3}
-                    \path (H3-\source) edge (O-\dest);
-        \end{tikzpicture}%
-    };%
-    \node (middle) at ($($(branch.east)+(1, 0)$)!0.5!($(trunk.east)+(1, 0)$)$) {}; % middle node
-    \draw[->] (branch.east) -- ($(middle.north)-(0.1, -0.1)$); % arrow from the end of the first diagram
-    \draw[->] (trunk.east) -- ($(middle.south)-(0.1, 0.1)$); % arrow from the end of the second diagram
-    \node[draw, circle, fill=white, inner sep = 0pt, minimum size = 4mm, font = \footnotesize] (node_prod) at (middle) {$\times$};
-    \node (label) at ($(middle)+(1,0)$) [label=right:{$\mathcal{G}(\mathbf{u}_i)(\mathbf{y})$}, font=\footnotesize] {}; % define the label node
-    \draw[->] ($(middle.east)+(0.15, 0)$) -- ($(label)+(0.2, 0)$); % draw an arrow from the middle node to the label node
-    \end{tikzpicture}
-\end{center}
-\end{frame}
+%             % Connect every node in the hidden layer with the output layer
+%             \foreach \source in {1,...,5}
+%                 \foreach \dest in {2,3}
+%                     \path (H3-\source) edge (O-\dest);
+%         \end{tikzpicture}%
+%     };%
+%     \node (middle) at ($($(branch.east)+(1, 0)$)!0.5!($(trunk.east)+(1, 0)$)$) {}; % middle node
+%     \draw[->] (branch.east) -- ($(middle.north)-(0.1, -0.1)$); % arrow from the end of the first diagram
+%     \draw[->] (trunk.east) -- ($(middle.south)-(0.1, 0.1)$); % arrow from the end of the second diagram
+%     \node[draw, circle, fill=white, inner sep = 0pt, minimum size = 4mm, font = \footnotesize] (node_prod) at (middle) {$\times$};
+%     \node (label) at ($(middle)+(1,0)$) [label=right:{$\mathcal{G}(\mathbf{u}_i)(\mathbf{y})$}, font=\footnotesize] {}; % define the label node
+%     \draw[->] ($(middle.east)+(0.15, 0)$) -- ($(label)+(0.2, 0)$); % draw an arrow from the middle node to the label node
+%     \end{tikzpicture}
+% \end{center}
+% \end{frame}
 
-\section{Operatori neurali}
-\sectionpage
+% \section{Operatori neurali}
 
-\begin{frame}{Problema di Darcy}
-    Consideriamo il problema di Darcy in due dimensioni, sottoposto a condizioni al bordo di Dirichlet omogene. L'equazione di flusso di Darcy, \'e un'equazione ellittica del secondo ordine, definita da
-    \begin{equation}
-        \begin{cases}
-            - \nabla(a \cdot \nabla u) = f,\quad &  \mathrm{in}\ D\\
-            u = 0, & \mathrm{su} \ \partial D
-        \end{cases}
-        \label{DarcyProblem}
-    \end{equation}
-    dove $ D = (0, 1)^2 $. Per questo problema $ \mathcal{A} = L^{\infty}(D, \R^+) $, $ \mathcal{U} = H^1_0(D, \R) $. Fissiamo come r.h.s $ f \equiv 1 $ e considerando la formulazione debole del problema si ha che la soluzione operatore \'e
-    \[  \mathcal{G}: L^{\infty}(D, \R^+) \to H^1_0(D, \R), \qquad \mathcal{G}:a \mapsto u. \]
-\end{frame}
+% \begin{frame}{Problema di Darcy}
+%     Consideriamo il problema di Darcy in due dimensioni, sottoposto a condizioni al bordo di Dirichlet omogene. L'equazione di flusso di Darcy, \'e un'equazione ellittica del secondo ordine, definita da
+%     \begin{equation}
+%         \begin{cases}
+%             - \nabla(a \cdot \nabla u) = f,\quad &  \mathrm{in}\ D\\
+%             u = 0, & \mathrm{su} \ \partial D
+%         \end{cases}
+%         \label{DarcyProblem}
+%     \end{equation}
+%     dove $ D = (0, 1)^2 $. Per questo problema $ \mathcal{A} = L^{\infty}(D, \R^+) $, $ \mathcal{U} = H^1_0(D, \R) $. Fissiamo come r.h.s $ f \equiv 1 $ e considerando la formulazione debole del problema si ha che la soluzione operatore \'e
+%     \[  \mathcal{G}: L^{\infty}(D, \R^+) \to H^1_0(D, \R), \qquad \mathcal{G}:a \mapsto u. \]
+% \end{frame}
 
-\begin{frame}{Fourier Neural Operator}
-    \begin{center}
-    \begin{tikzpicture}
-        \tikzset{
-            box/.style={draw, rounded corners, align=center, minimum height=0.8cm, minimum width=1cm, fill=orange!30},
-            bigbox/.style={draw, rounded corners, align=center, minimum height=2cm, minimum width=1cm, fill=yellow!30},
-            node_sum/.style={draw, circle, fill=white, inner sep=0pt, minimum size=4mm},
-            every node/.style={font=\small}
-        }
-        % Nodes for the main structure
-        \node[box, label=above:{\textit{Input}}] (input) {$f(x)$};
-        \node[box, right=0.5cm of input, label=above:{\textit{Lifting}}] (lifting) { $\mathcal{P}$ };
-        \node[bigbox, right=0.5cm of lifting] (fourier1) {$\mathcal{L}_{1}$};
-        \node[bigbox, right=0.55cm of fourier1] (fourier2) {$\mathcal{L}_{t}$};
-        \node[bigbox, right=0.55cm of fourier2] (fourier3) {$\mathcal{L}_{L}$};
-        \node[box, right=0.5cm of fourier3, label=above:{\textit{Projection}}] (projection) {$\mathcal{Q}$};
-        \node[box, right=0.5cm of projection, label=above:{\textit{Output}}] (output) {$u(x)$};
+% \begin{frame}{Fourier Neural Operator}
+%     \begin{center}
+%     \begin{tikzpicture}
+%         \tikzset{
+%             box/.style={draw, rounded corners, align=center, minimum height=0.8cm, minimum width=1cm, fill=orange!30},
+%             bigbox/.style={draw, rounded corners, align=center, minimum height=2cm, minimum width=1cm, fill=yellow!30},
+%             node_sum/.style={draw, circle, fill=white, inner sep=0pt, minimum size=4mm},
+%             every node/.style={font=\small}
+%         }
+%         % Nodes for the main structure
+%         \node[box, label=above:{\textit{Input}}] (input) {$f(x)$};
+%         \node[box, right=0.5cm of input, label=above:{\textit{Lifting}}] (lifting) { $\mathcal{P}$ };
+%         \node[bigbox, right=0.5cm of lifting] (fourier1) {$\mathcal{L}_{1}$};
+%         \node[bigbox, right=0.55cm of fourier1] (fourier2) {$\mathcal{L}_{t}$};
+%         \node[bigbox, right=0.55cm of fourier2] (fourier3) {$\mathcal{L}_{L}$};
+%         \node[box, right=0.5cm of fourier3, label=above:{\textit{Projection}}] (projection) {$\mathcal{Q}$};
+%         \node[box, right=0.5cm of projection, label=above:{\textit{Output}}] (output) {$u(x)$};
         
-        % Draw arrows between nodes
-        \draw[->, line width = .7pt] ($(input.east)+(0.05, 0)$) -- ($(lifting.west)-(0.05,0)$);
-        \draw[->, line width = .7pt] ($(lifting.east)+(0.05, 0)$) -- ($(fourier1.west)-(0.03,0)$);
-        \draw[dotted, line width = 2pt] ($(fourier1.east)+(0.1, 0)$) -- ($(fourier2.west)-(0.1,0)$);
-        \draw[dotted, line width = 2pt] ($(fourier2.east)+(0.1, 0)$) -- ($(fourier3.west)-(0.1,0)$);
-        \draw[->, line width = .7pt] ($(fourier3.east)+(0.05, 0)$) -- ($(projection.west)-(0.05,0)$);
-        \draw[->, line width = .7pt] ($(projection.east)+(0.05, 0)$) -- ($(output.west)-(0.05,0)$);
+%         % Draw arrows between nodes
+%         \draw[->, line width = .7pt] ($(input.east)+(0.05, 0)$) -- ($(lifting.west)-(0.05,0)$);
+%         \draw[->, line width = .7pt] ($(lifting.east)+(0.05, 0)$) -- ($(fourier1.west)-(0.03,0)$);
+%         \draw[dotted, line width = 2pt] ($(fourier1.east)+(0.1, 0)$) -- ($(fourier2.west)-(0.1,0)$);
+%         \draw[dotted, line width = 2pt] ($(fourier2.east)+(0.1, 0)$) -- ($(fourier3.west)-(0.1,0)$);
+%         \draw[->, line width = .7pt] ($(fourier3.east)+(0.05, 0)$) -- ($(projection.west)-(0.05,0)$);
+%         \draw[->, line width = .7pt] ($(projection.east)+(0.05, 0)$) -- ($(output.west)-(0.05,0)$);
         
-        % Annotations for the Fourier Layers
-        \node[align=center, above=0.2cm of fourier2, font=\footnotesize] { \textit{Fourier Layers} };
+%         % Annotations for the Fourier Layers
+%         \node[align=center, above=0.2cm of fourier2, font=\footnotesize] { \textit{Fourier Layers} };
         
-        % Internal structure bounding box
-        \node[draw, line width = .7pt, rounded corners, inner sep=0.2cm, fit= (fourier1) (fourier2) (fourier3)] (internal) {};
+%         % Internal structure bounding box
+%         \node[draw, line width = .7pt, rounded corners, inner sep=0.2cm, fit= (fourier1) (fourier2) (fourier3)] (internal) {};
 
-        %%% Second part of the plot
-        % Internal structure bounding box
-		\node[draw, below=0.2cm of internal, rounded corners, inner sep=0.2cm, fill=yellow!30] (internal) {
-			\begin{tikzpicture}[every node/.style={font=\small}]
-				% Nodes for the internal structure
-				\node[box] (vt) {$v_{t}(x)$};
-				\node[box, right=1cm of vt] (transform) {$\mathcal{F}$};
-				\node[box, right=0.5cm of transform, fill=green!25] (nonlinear) { $ R_{\theta_t} $ };
-				\node[box, right=0.5cm of nonlinear] (invtransform) { $ \mathcal{F}^{-1} $ };
-				\node[box, below=0.8cm of nonlinear, fill=green!25] (linear) { $ W_t, b_t $ };
+%         %%% Second part of the plot
+%         % Internal structure bounding box
+% 		\node[draw, below=0.2cm of internal, rounded corners, inner sep=0.2cm, fill=yellow!30] (internal) {
+% 			\begin{tikzpicture}[every node/.style={font=\small}]
+% 				% Nodes for the internal structure
+% 				\node[box] (vt) {$v_{t}(x)$};
+% 				\node[box, right=1cm of vt] (transform) {$\mathcal{F}$};
+% 				\node[box, right=0.5cm of transform, fill=green!25] (nonlinear) { $ R_{\theta_t} $ };
+% 				\node[box, right=0.5cm of nonlinear] (invtransform) { $ \mathcal{F}^{-1} $ };
+% 				\node[box, below=0.8cm of nonlinear, fill=green!25] (linear) { $ W_t, b_t $ };
 
-                % Internal structure bounding box
-                \node[draw, line width = .7pt, rounded corners, inner sep=0.15cm, fit= (transform) (nonlinear) (invtransform) ] (diagonalscaling) {};
+%                 % Internal structure bounding box
+%                 \node[draw, line width = .7pt, rounded corners, inner sep=0.15cm, fit= (transform) (nonlinear) (invtransform) ] (diagonalscaling) {};
 
-				\node[node_sum, right=0.5cm of invtransform] (node_sum) {$\mathbf{+}$};
-				\node[box, right=0.5cm of node_sum] (activation) {$\sigma$};
-				\node[box, right=0.5cm of activation] (vtplusone) {$v_{t+1}(x)$};
+% 				\node[node_sum, right=0.5cm of invtransform] (node_sum) {$\mathbf{+}$};
+% 				\node[box, right=0.5cm of node_sum] (activation) {$\sigma$};
+% 				\node[box, right=0.5cm of activation] (vtplusone) {$v_{t+1}(x)$};
 				
-				% Draw arrows between nodes
-				\draw[line width = .7pt] ($(vt.east)+(0.05, 0)$) -- (diagonalscaling);
-				\draw[->, line width = .7pt] ($(transform.east)+(0.05, 0)$) -- ($(nonlinear.west)-(0.05, 0)$);
-				\draw[->, line width = .7pt] ($(nonlinear.east)+(0.05, 0)$) -- ($(invtransform.west)-(0.05, 0)$);
-				\draw[->, line width = .7pt] ($(vt.south)-(0, 0.05)$) |- ($(linear.west)-(0.05, 0)$);
-				\draw[->, line width = .7pt] (diagonalscaling) -- ($(node_sum.west)-(0.05, 0)$);
-				\draw[->, line width = .7pt] ($(linear.east)+(0.05, 0)$) -| ($(node_sum.south)-(0, 0.05)$);
-				\draw[->, line width = .7pt] ($(node_sum.east)+(0.05, 0)$) -- ($(activation.west)-(0.05, 0)$);
-				\draw[->, line width = .7pt] ($(activation.east)+(0.05, 0)$) -- ($(vtplusone.west)-(0.05, 0)$);
+% 				% Draw arrows between nodes
+% 				\draw[line width = .7pt] ($(vt.east)+(0.05, 0)$) -- (diagonalscaling);
+% 				\draw[->, line width = .7pt] ($(transform.east)+(0.05, 0)$) -- ($(nonlinear.west)-(0.05, 0)$);
+% 				\draw[->, line width = .7pt] ($(nonlinear.east)+(0.05, 0)$) -- ($(invtransform.west)-(0.05, 0)$);
+% 				\draw[->, line width = .7pt] ($(vt.south)-(0, 0.05)$) |- ($(linear.west)-(0.05, 0)$);
+% 				\draw[->, line width = .7pt] (diagonalscaling) -- ($(node_sum.west)-(0.05, 0)$);
+% 				\draw[->, line width = .7pt] ($(linear.east)+(0.05, 0)$) -| ($(node_sum.south)-(0, 0.05)$);
+% 				\draw[->, line width = .7pt] ($(node_sum.east)+(0.05, 0)$) -- ($(activation.west)-(0.05, 0)$);
+% 				\draw[->, line width = .7pt] ($(activation.east)+(0.05, 0)$) -- ($(vtplusone.west)-(0.05, 0)$);
 
-			\end{tikzpicture}
-		};
-        % Connection between the two parts
-        \draw[] ($(internal.north west)+(0.1, 0.05)$) -- (fourier2.south west);
-        \draw[] ($(internal.north east)+(-0.1, 0.05)$) -- (fourier2.south east);
-    \end{tikzpicture}
-    \end{center}
-\end{frame}
+% 			\end{tikzpicture}
+% 		};
+%         % Connection between the two parts
+%         \draw[] ($(internal.north west)+(0.1, 0.05)$) -- (fourier2.south west);
+%         \draw[] ($(internal.north east)+(-0.1, 0.05)$) -- (fourier2.south east);
+%     \end{tikzpicture}
+%     \end{center}
+% \end{frame}
 
-\begin{frame}[t]{Darcy problem}
-    Volgiamo approssimare l'operatore soluzione $\mathcal{G}: a \mapsto u$ associato al problema di Darcy.
-    \begin{center}
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/darcy/input.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/darcy/output.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/darcy/FNOappro.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/darcy/error.png}
-        \end{minipage}
-    \end{center}
-    La FNO ha $2,3$M parametri, tempo di training di $2$ ore, errore di test relativo in norma $L^{2}$ pari a $0.008$.
-\end{frame}
+% \begin{frame}[t]{Darcy problem}
+%     Volgiamo approssimare l'operatore soluzione $\mathcal{G}: a \mapsto u$ associato al problema di Darcy.
+%     \begin{center}
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/darcy/input.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/darcy/output.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/darcy/FNOappro.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/darcy/error.png}
+%         \end{minipage}
+%     \end{center}
+%     La FNO ha $2,3$M parametri, tempo di training di $2$ ore, errore di test relativo in norma $L^{2}$ pari a $0.008$.
+% \end{frame}
 
-\begin{frame}[t]{Transport continuous equation}
-    \[
-    u_{t} + v \cdot \nabla u = 0 \quad \text{in } \Omega \times (0, T), \quad\quad u_{0}(x, y) = f(x, y),
-    \]
-    con $f$ funzione regolare. Si fissa $v = (0.2, \, 0.2)$ e si approssima l'operatore $\mathcal{G}: f\mapsto u_{T=1}$.
-    \begin{center}
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/contTrans/input.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/contTrans/output.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/contTrans/FNOappro.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/contTrans/error.png}
-        \end{minipage}
-    \end{center}
-    La FNO ha $21$M parametri, tempo di training di $50$ minuti, errore di test relativo in norma $L^{2}$ pari a $0.007$.
-\end{frame}
+% \begin{frame}[t]{Transport continuous equation}
+%     \[
+%     u_{t} + v \cdot \nabla u = 0 \quad \text{in } \Omega \times (0, T), \quad\quad u_{0}(x, y) = f(x, y),
+%     \]
+%     con $f$ funzione regolare. Si fissa $v = (0.2, \, 0.2)$ e si approssima l'operatore $\mathcal{G}: f\mapsto u_{T=1}$.
+%     \begin{center}
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/contTrans/input.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/contTrans/output.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/contTrans/FNOappro.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/contTrans/error.png}
+%         \end{minipage}
+%     \end{center}
+%     La FNO ha $21$M parametri, tempo di training di $50$ minuti, errore di test relativo in norma $L^{2}$ pari a $0.007$.
+% \end{frame}
 
-\begin{frame}[t]{Transport discontinuous equation}
-    \[
-    u_{t} + v \cdot \nabla u = 0 \quad \text{in } \Omega \times (0, T), \quad\quad u_{0}(x, y) = f(x, y),
-    \]
-    con $f$ funzione discontinua. Si fissa $v = (0.2, \, 0.2)$ e si approssima l'operatore $\mathcal{G}: f\mapsto u_{T=1}$.
-    \begin{center}
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/discTrans/input.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/discTrans/output.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/discTrans/FNOappro.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/discTrans/error.png}
-        \end{minipage}
-    \end{center}
-    La FNO ha $16$M parametri, tempo di training di $21$ ore, errore di test relativo in norma $L^{2}$ pari a $0.013$.
-\end{frame}
+% \begin{frame}[t]{Transport discontinuous equation}
+%     \[
+%     u_{t} + v \cdot \nabla u = 0 \quad \text{in } \Omega \times (0, T), \quad\quad u_{0}(x, y) = f(x, y),
+%     \]
+%     con $f$ funzione discontinua. Si fissa $v = (0.2, \, 0.2)$ e si approssima l'operatore $\mathcal{G}: f\mapsto u_{T=1}$.
+%     \begin{center}
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/discTrans/input.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/discTrans/output.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/discTrans/FNOappro.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/discTrans/error.png}
+%         \end{minipage}
+%     \end{center}
+%     La FNO ha $16$M parametri, tempo di training di $21$ ore, errore di test relativo in norma $L^{2}$ pari a $0.013$.
+% \end{frame}
 
-\begin{frame}[t]{Poisson Equation}
-    \[
-    -\Delta u = f, \quad \text{in } \Omega = [0, 1]^{2}, \quad\quad u_{| \partial \Omega} = 0.
-    \]
-    Si approssima l'operatore $\mathcal{G}: f\mapsto u$.
-    \begin{center}
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/poisson/input.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/poisson/output.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/poisson/FNOappro.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/poisson/error.png}
-        \end{minipage}
-    \end{center}
-    La FNO ha $1$M parametri, tempo di training di $20$ minuti, errore di test relativo in norma $L^{2}$ pari a $0.04$.
-\end{frame}
+% \begin{frame}[t]{Poisson Equation}
+%     \[
+%     -\Delta u = f, \quad \text{in } \Omega = [0, 1]^{2}, \quad\quad u_{| \partial \Omega} = 0.
+%     \]
+%     Si approssima l'operatore $\mathcal{G}: f\mapsto u$.
+%     \begin{center}
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/poisson/input.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/poisson/output.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/poisson/FNOappro.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/poisson/error.png}
+%         \end{minipage}
+%     \end{center}
+%     La FNO ha $1$M parametri, tempo di training di $20$ minuti, errore di test relativo in norma $L^{2}$ pari a $0.04$.
+% \end{frame}
 
-\begin{frame}[t]{Navier-Stokes Equation}
-    \[
-    u_{t} + (u \cdot \nabla) u + \nabla p = \nu \Delta u, \qquad div \, u = 0, \quad \quad u_{0}(x, y) = f(x, y).
-    \]
-    Dove $\nu = 4 \cdot 10^{-4}$ e si approssima l'operatore soluzione $\mathcal{G}: f\mapsto u_{T=1}$.
-    \begin{center}
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/shearLayer/input.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/shearLayer/output.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/shearLayer/FNOappro.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/shearLayer/error.png}
-        \end{minipage}
-    \end{center}
-    La FNO ha $32,8$M parametri, tempo di training di $30$ minuti, errore di test relativo in norma $L^{2}$ pari a $0.05$.
-\end{frame}
+% \begin{frame}[t]{Navier-Stokes Equation}
+%     \[
+%     u_{t} + (u \cdot \nabla) u + \nabla p = \nu \Delta u, \qquad div \, u = 0, \quad \quad u_{0}(x, y) = f(x, y).
+%     \]
+%     Dove $\nu = 4 \cdot 10^{-4}$ e si approssima l'operatore soluzione $\mathcal{G}: f\mapsto u_{T=1}$.
+%     \begin{center}
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/shearLayer/input.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/shearLayer/output.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/shearLayer/FNOappro.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/shearLayer/error.png}
+%         \end{minipage}
+%     \end{center}
+%     La FNO ha $32,8$M parametri, tempo di training di $30$ minuti, errore di test relativo in norma $L^{2}$ pari a $0.05$.
+% \end{frame}
 
-\begin{frame}[t]{Wave Equation}
-    \[
-    u_{tt} -c^{2}\Delta u = 0, \quad \text{in } \Omega \times (0, T), \quad\quad u_{0}(x, y) = f(x, y).
-    \]
-    Dove $c = 0.1$ e si approssima l'operatore soluzione $\mathcal{G}: f\mapsto u_{T=5}$.
-    \begin{center}
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/wave/input.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/wave/output.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/wave/FNOappro.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/wave/error.png}
-        \end{minipage}
-    \end{center}
-    La FNO ha $4, 9$M parametri, tempo di training di $7$ ore, errore di test relativo in norma $L^{2}$ pari a $0.014$.
-\end{frame}
+% \begin{frame}[t]{Wave Equation}
+%     \[
+%     u_{tt} -c^{2}\Delta u = 0, \quad \text{in } \Omega \times (0, T), \quad\quad u_{0}(x, y) = f(x, y).
+%     \]
+%     Dove $c = 0.1$ e si approssima l'operatore soluzione $\mathcal{G}: f\mapsto u_{T=5}$.
+%     \begin{center}
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/wave/input.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/wave/output.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/wave/FNOappro.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/wave/error.png}
+%         \end{minipage}
+%     \end{center}
+%     La FNO ha $4, 9$M parametri, tempo di training di $7$ ore, errore di test relativo in norma $L^{2}$ pari a $0.014$.
+% \end{frame}
 
-\begin{frame}[t]{Allen-Cahn equation}
-   \[
-   u_{t} = \Delta u - \varepsilon^{2} u (u^{2}-1).
-   \] 
-   Dove $\varepsilon = 220 $ e si approssima l'operatore soluzione $\mathcal{G}: f\mapsto u_{T}$ con $T = 0.0002$.
-    \begin{center}
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/allen/input.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/allen/output.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/allen/FNOappro.png}
-        \end{minipage}
-        \hfill
-        \begin{minipage}{0.24\textwidth}
-            \includegraphics[width=\textwidth]{operators/allen/error.png}
-        \end{minipage}
-    \end{center}
-    La FNO ha $4, 9$M parametri, tempo di training di $2$ ore, errore di test relativo in norma $L^{2}$ pari a $0.004$.
-\end{frame}
+% \begin{frame}[t]{Allen-Cahn equation}
+%    \[
+%    u_{t} = \Delta u - \varepsilon^{2} u (u^{2}-1).
+%    \] 
+%    Dove $\varepsilon = 220 $ e si approssima l'operatore soluzione $\mathcal{G}: f\mapsto u_{T}$ con $T = 0.0002$.
+%     \begin{center}
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/allen/input.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/allen/output.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/allen/FNOappro.png}
+%         \end{minipage}
+%         \hfill
+%         \begin{minipage}{0.24\textwidth}
+%             \includegraphics[width=\textwidth]{operators/allen/error.png}
+%         \end{minipage}
+%     \end{center}
+%     La FNO ha $4, 9$M parametri, tempo di training di $2$ ore, errore di test relativo in norma $L^{2}$ pari a $0.004$.
+% \end{frame}
 
-\begin{frame}
-    \centering
-    \Huge
-    Grazie per \adjustbox{valign=m}{\includegraphics[height=0.75\textheight]{architectures/attention-final.png}}
-\end{frame}
+% \begin{frame}
+%     \centering
+%     \Huge
+%     Grazie per \adjustbox{valign=m}{\includegraphics[height=0.75\textheight]{architectures/attention-final.png}}
+% \end{frame}
+
+\backmatter
 
 \end{document}
 

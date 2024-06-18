@@ -1,0 +1,31 @@
+# Ignore compiled binaries
+*.exe
+*.dll
+
+# Ignore build output directories
+/bin/
+/obj/
+
+# Ignore package files
+*.nupkg
+*.zip
+
+# Ignore log files
+*.log
+
+# Ignore user-specific files
+*.user
+
+# Ignore system files
+Thumbs.db
+.DS_Store
+
+# dummy file
+main.fls
+main.synctex.gz
+main.snm
+main.nav
+main.aux
+main.fdb_latexmk
+main.out
+main.toc
